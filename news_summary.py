@@ -33,12 +33,15 @@ from sumy.parsers.plaintext import PlaintextParser
 from sumy.nlp.tokenizers import Tokenizer
 from sumy.summarizers.lex_rank import LexRankSummarizer
 
-# Ensure NLTK resources are available (punkt tokenizer)
+# Ensure NLTK resources are available (punkt & punkt_tab tokenizers)
 import nltk
-try:
-    nltk.data.find("tokenizers/punkt")
-except LookupError:  # pragma: no cover
-    nltk.download("punkt", quiet=True)
+
+for _resource in ("punkt", "punkt_tab"):
+    try:
+        # punkt_tab is organised by language folders; a simple exist check will suffice
+        nltk.data.find(f"tokenizers/{_resource}")
+    except LookupError:  # pragma: no cover
+        nltk.download(_resource, quiet=True)
 
 
 def fetch_rss_entries(company: str, max_results: int = 30):
