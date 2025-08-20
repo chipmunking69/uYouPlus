@@ -4,3 +4,4 @@ beautifulsoup4==4.12.2
 sumy==0.11.0
 nltk==3.8.1
 numpy==1.26.4
+PyMuPDF==1.24.10
